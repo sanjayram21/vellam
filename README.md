@@ -4,6 +4,8 @@ An interactive 3D satellite map of Chennai that simulates October–December mon
 
 Illustrative, not a calibrated engineering model — see [RESEARCH.md](RESEARCH.md) for what it is and is not.
 
+> **Note:** the `flood_extents/` filenames in the dataset README use a different prefix from the files themselves — use the on-disk names (`nrsc_flood_extent_2015.parquet`, `hotspots_gcc_nem2020.parquet`, …).
+
 ## Documents
 
 - [RESEARCH.md](RESEARCH.md) — feasibility research: map stack, elevation sources, water engine, buried lakes, historical flood data. Includes what was tried and rejected.
