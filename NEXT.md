@@ -4,19 +4,19 @@ Working directory: `/mnt/c/Users/sanja/super-repo/vellam`
 
 Read `README.md`, then `RESEARCH.md` and `PLAN.md`. The decisions are locked; do not re-research them.
 
-## Blocked on the user
+## Setup — done 2026-11-18
 
-1. `gh auth login` — gh 2.105.0 is installed at `~/.local/bin/gh`, **not authenticated**. Interactive; the user runs it.
-2. Then: `git remote add origin https://github.com/sanjayram21/vellam.git && git push -u origin main` — push to `main` directly, repo is public.
-3. Commit author is the placeholder `sanjay <sanjay@users.noreply.github.com>` — ask whether to amend before or after the push.
+`gh` is authenticated as `sanjayram21`; commits are authored `sanjayram21 <sanjayram21@users.noreply.github.com>` (rewritten before first push); `origin` is set and `main` is pushed. Repo is public at `https://github.com/sanjayram21/vellam`.
 
 Verify first with `git log --oneline`. If the path acts empty, see below.
 
-## Then: the build
+## The build
 
 `PLAN.md` Phase 0 → 0b → 0c are offline data prep and can start immediately. Phase 2's drainage sink capacities come from Phase 0c's calibration, so don't reorder.
 
 ## Hazards on this machine
 
 - **Don't rename this directory.** Renaming it broke WSL's view of the path once. If it reads empty while Windows `cmd /c dir` shows files, the mount is stale: copy out via the `Vellam` alias, remove from Windows, copy back.
-- Python is 3.8 with pinned wheels only. No Node, no CUDA, no Overpass. No CORS server: serve with `python3 -m http.server`.
+- Python is 3.8 with pinned wheels only. No CUDA, no Overpass.
+- **Node is installed via nvm in WSL** (needed by Vite). Never use the stale `C:\Program Files\nodejs` v16 — its shims are CRLF-broken from WSL and it's too old for Vite.
+- drvfs occasionally throws a spurious ENOENT or stale file view under concurrent edits — retry the single edit before concluding a file is gone.

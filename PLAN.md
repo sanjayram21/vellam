@@ -1,8 +1,10 @@
 # Plan — Chennai Monsoon Flood Visualizer
 
-Choices locked: **drainage-network engine** · **whole metro** · **intensity + duration sliders** · **static HTML/JS**.
+Choices locked: **drainage-network engine** · **whole metro** · **intensity + duration sliders** · **React + TypeScript on Vite**.
 
-Honesty note on realism: React does not affect realism — MapLibre's terrain, the satellite imagery, and the shaders do. Static ES modules give a faster-loading app with no transpile step. We can migrate the panel to React later if you want; it's a mechanical change.
+Split of concerns: **offline compute is Python** (rasterio/numpy/scipy — the right tools for raster algebra, already installed and verified); **the frontend is TypeScript**. Python emits static `flowdir`/`capacity`/heightfield arrays plus a generated `.d.ts` contract, so the frontend cannot misuse their shapes.
+
+React owns the **shell only** — panel, legend, history toggles. The MapLibre map and the simulation loop stay imperative in refs, because a 60 fps loop driven through React state will drop frames. Honesty note on realism: React does not affect realism — terrain, imagery and shaders do. The cost of this choice is a build step: Vite is required in dev, and builds the static bundle for Phase 5.
 
 ## What it will look like
 
@@ -69,7 +71,7 @@ Satellite Chennai in 3D. A control panel with a **rain intensity (0–200 mm/hr)
 
 ## Phase 5 — Offline package
 
-- Manifest + local static server; everything runs with the network unplugged; cached tiles; no key required.
+- `vite build` to a static bundle, manifest + local static server; everything runs with the network unplugged; cached tiles; no key required. React stays in the bundle, so Phase 5 must confirm the build output has no dev-server dependency.
 
 ---
 
@@ -78,6 +80,10 @@ Satellite Chennai in 3D. A control panel with a **rain intensity (0–200 mm/hr)
 - Heightfield 64 MB; occlusion/capacity arrays small. GTX 1650 (4 GB) has room for a sparse view of the metro.
 - Priority-flood on 16.7 M cells in Python is minutes, not seconds — acceptable, it's a one-off offline step. If too slow, try a `richdem` wheel; if that fails on Python 3.8, keep the heap version.
 - z13–z16 metro imagery ≈ 2 GB. Disk has 42 GB.
+
+## Language split
+
+Offline compute in Python; frontend in TypeScript on React + Vite. The shared contract is the emitted arrays plus a hand-checked `.d.ts`. Both halves must agree on grid size, origin, orientation and units (metres, row-major, north-up, y increasing south) — a mismatch here silently renders the map mirrored rather than failing, so the heightfield round-trip is the first test written in Phase 0.
 
 ## Known risks
 

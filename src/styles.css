@@ -1,0 +1,49 @@
+:root {
+  color-scheme: dark;
+  --panel: #14181c;
+  --ink: #e8edf2;
+  --muted: #8494a3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #0b0e11;
+  color: var(--ink);
+  font: 14px/1.4 ui-sans-serif, system-ui, sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  height: 100%;
+}
+
+.map {
+  background: #0b0e11;
+}
+
+.panel {
+  background: var(--panel);
+  padding: 16px;
+  border-left: 1px solid #232a31;
+}
+
+.panel h1 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.status {
+  margin: 0 0 12px;
+  color: var(--muted);
+}

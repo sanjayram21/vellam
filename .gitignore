@@ -36,3 +36,7 @@ Thumbs.db
 # Local scratch
 scratch/
 *.log
+
+# Node
+node_modules/
+dist/

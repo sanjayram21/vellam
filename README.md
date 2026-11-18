@@ -21,7 +21,9 @@ Illustrative, not a calibrated engineering model — see [RESEARCH.md](RESEARCH.
 | Buried lakes | Poldered catchments with throttled outfalls; burial is modelled, not labelled |
 | Calibration | Official GCC 2015 hotspots; NEM-2020 held out as the test year |
 | Map | MapLibre GL JS + Esri World Imagery, self-hosted DEM tiles |
-| Stack | Static HTML + ES modules, no build step |
+| Frontend | React + TypeScript on Vite; sim and MapLibre imperative behind refs |
+| Offline compute | Python (rasterio, numpy, scipy) — writes static arrays the frontend consumes |
+| Output | Vite builds a static bundle; still opens offline with no server-side code |
 
 ## Data
 
