@@ -1,0 +1,38 @@
+# Elevation and imagery
+*.hgt
+*.hgt.gz
+*.tif
+*.tiff
+*.dem
+data/
+elevation/
+tiles/
+buildings/
+history/
+catchments/
+
+# OSM extracts
+*.osm.pbf
+*.osm.bz2
+
+# Archive downloads
+*.zip
+*.gz
+!package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pip-boot/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local scratch
+scratch/
+*.log
